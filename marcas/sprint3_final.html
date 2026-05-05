@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Uranzu Transporte Logístico</title>
+  <link href="stylesprint.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <style>
+    /* ── Sección Destinos ──────────────────────────────── */
+    #destinos {
+      max-width: 1000px;
+      width: 90%;
+    }
+
+    .destinos-controles {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .destinos-controles input {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.55rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    .destinos-controles input:focus {
+      outline: none;
+      border-color: var(--color-secundario);
+    }
+
+    .destinos-controles select {
+      padding: 0.55rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .destinos-controles select:focus {
+      outline: none;
+      border-color: var(--color-secundario);
+    }
+
+    .btn-buscar {
+      background-color: var(--color-principal);
+      color: white;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-buscar:hover {
+      background-color: #8f1500;
+      transform: translateY(-1px);
+    }
+
+    /* Estado loading */
+    #destinos-estado {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    #destinos-estado.error {
+      color: var(--color-principal);
+      font-weight: 600;
+    }
+
+    /* Grid de cards */
+    #destinos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .pais-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      border-left: 4px solid var(--color-principal);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .pais-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
+    .pais-bandera {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .pais-nombre {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-texto);
+    }
+
+    .pais-info {
+      font-size: 0.82rem;
+      color: #555;
+    }
+
+    .pais-info span {
+      display: block;
+    }
+
+    .pais-region {
+      display: inline-block;
+      margin-top: 0.3rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      background-color: var(--color-secundario);
+      color: white;
+    }
+
+    .contador-resultados {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #ddd;
+      border-top-color: var(--color-secundario);
+      border-radius: 50%;
+      animation: girar 0.7s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    @keyframes girar {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      #destinos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top-bar">
+    <div class="logo">
+      <h1>Uranzu Transporte Logístico</h1>
+      <p>Conectando destinos, moviendo el futuro</p>
+    </div>
+    <div class="auth-buttons">
+      <a class="btn-login" href="login_final.html">Iniciar sesión</a>
+      <a class="btn-register" href="registro_final.html">Registrarse</a>
+    </div>
+  </div>
+  <nav>
+    <ul class="button">
+      <li><a class="btn" href="#inicio">Inicio</a></li>
+      <li><a class="btn" href="#servicios">Servicios</a></li>
+      <li><a class="btn" href="#flota">Flota</a></li>
+      <li><a class="btn" href="#nosotros">Nosotros</a></li>
+      <li><a class="btn" href="#destinos">Destinos</a></li>
+      <li><a class="btn" href="#contacto">Contacto</a></li>
+      <li><a class="btn" href="uranzu_transformado.html">Datos (XML)</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container my-4">
+
+  <!-- ── Sección Inicio ── -->
+  <section id="inicio">
+    <h2>Inicio</h2>
+    <p>En <strong>Uranzu Transporte Logístico</strong> somos expertos en ofrecer soluciones de transporte eficientes y seguras a nivel nacional e internacional. Nuestro compromiso es garantizar puntualidad, seguridad y confianza en cada envío.</p>
+    <img alt="Camión de transporte logístico de Uranzu" src="camion.jpg"/>
+  </section>
+
+  <!-- ── Sección Servicios ── -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <article>
+      <h3>Transporte Nacional</h3>
+      <p>Ofrecemos transporte terrestre rápido y confiable dentro de todo el territorio nacional, con seguimiento en tiempo real.</p>
+    </article>
+    <article>
+      <h3>Transporte Internacional</h3>
+      <p>Contamos con amplia experiencia en logística internacional, conectando empresas de Europa y Latinoamérica.</p>
+    </article>
+    <article>
+      <h3>Almacenaje y Distribución</h3>
+      <p>Gestionamos tus productos con eficiencia desde el almacenamiento hasta la entrega final, optimizando toda la cadena logística.</p>
+    </article>
+  </section>
+
+  <!-- ── Sección Flota ── -->
+  <section id="flota">
+    <h2>Nuestra Flota</h2>
+    <p>Disponemos de una flota moderna equipada con tecnología GPS y sistemas de monitoreo, garantizando la trazabilidad y seguridad de cada envío.</p>
+    <img alt="Flota de camiones de Uranzu" src="uranzu_flota.jpg"/>
+  </section>
+
+  <!-- ── Sección Nosotros ── -->
+  <section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>Uranzu es una empresa con más de 20 años de experiencia en el sector logístico. Nuestro equipo humano y tecnológico está comprometido con la excelencia en el servicio y la satisfacción de nuestros clientes.</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       SECCIÓN DESTINOS — fetch() API REST Countries
+       API: https://restcountries.com/v3.1/
+       Permite buscar países por nombre o filtrar por región.
+       ══════════════════════════════════════════════════ -->
+  <section id="destinos">
+    <h2>Destinos Internacionales</h2>
+    <p>Consulta información sobre los países a los que operamos. Busca por nombre o filtra por región para conocer capital, moneda e idioma de cada destino.</p>
+
+    <!-- Controles de búsqueda y filtro -->
+    <div class="destinos-controles" style="margin-top:1.2rem;">
+      <input
+        type="text"
+        id="input-buscar"
+        placeholder="🔍 Buscar país... (ej. Spain, France)"
+        aria-label="Buscar país"
+      />
+      <select id="select-region" aria-label="Filtrar por región">
+        <option value="">Todas las regiones</option>
+        <option value="Europe">Europa</option>
+        <option value="Americas">América</option>
+        <option value="Asia">Asia</option>
+        <option value="Africa">África</option>
+        <option value="Oceania">Oceanía</option>
+      </select>
+      <button class="btn-buscar" id="btn-buscar" onclick="buscarPaises()">Buscar</button>
+    </div>
+
+    <!-- Estado: cargando / error / vacío -->
+    <div id="destinos-estado" style="display:none;"></div>
+
+    <!-- Contador de resultados -->
+    <p id="contador-resultados" class="contador-resultados" style="display:none;"></p>
+
+    <!-- Grid donde se renderizan las cards -->
+    <div id="destinos-grid"></div>
+  </section>
+
+  <!-- ── Sección Contacto ── -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>¿Tienes alguna consulta o solicitud de presupuesto? Contáctanos:</p>
+    <ul>
+      <li>📞 Teléfono: +34 600 123 456</li>
+      <li>📧 Email: <a href="mailto:info@uranzu.com">info@uranzu.com</a></li>
+      <li>📍 Dirección: Polígono Industrial Uranzu, Calle Logística 5, Madrid</li>
+    </ul>
+  </section>
+
+  <!-- ── Sección Datos XML ── -->
+  <section id="datos">
+    <h2>Datos (XML + XSLT)</h2>
+    <p>Consulta el listado de clientes generado automáticamente desde XML aplicando una transformación XSLT.</p>
+    <a class="btn btn-primary" href="uranzu_transformado.html">Ver clientes</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Uranzu Transporte Logístico. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  /* ══════════════════════════════════════════════════════════════
+     API: REST Countries  –  https://restcountries.com/v3.1/
+     Endpoints utilizados:
+       · /name/{nombre}          → búsqueda por nombre
+       · /region/{region}        → filtro por región
+       · /all?fields=...         → carga inicial (top países Europa)
+     ══════════════════════════════════════════════════════════════ */
+
+  // Referencias a elementos del DOM
+  const grid        = document.getElementById('destinos-grid');
+  const estado      = document.getElementById('destinos-estado');
+  const contador    = document.getElementById('contador-resultados');
+  const inputBuscar = document.getElementById('input-buscar');
+  const selectReg   = document.getElementById('select-region');
+
+  // Campos que necesitamos de la API (reduce payload)
+  const FIELDS = 'fields=name,flags,capital,region,subregion,currencies,languages,population';
+
+  // ── Utilidades de UI ───────────────────────────────────────────
+
+  /** Muestra el spinner de carga */
+  function mostrarCargando() {
+    grid.innerHTML = '';
+    contador.style.display = 'none';
+    estado.style.display   = 'block';
+    estado.className       = '';
+    estado.innerHTML       = '<span class="spinner"></span> Cargando destinos…';
+  }
+
+  /** Muestra un mensaje de error sin romper la página */
+  function mostrarError(mensaje) {
+    estado.style.display = 'block';
+    estado.className     = 'error';
+    estado.innerHTML     = `⚠️ ${mensaje}`;
+    grid.innerHTML       = '';
+    contador.style.display = 'none';
+  }
+
+  /** Oculta el estado y muestra el grid */
+  function ocultarEstado() {
+    estado.style.display = 'none';
+  }
+
+  // ── Render de una card de país ─────────────────────────────────
+
+  /**
+   * Construye el HTML de una card a partir de los datos de un país.
+   * @param {Object} pais - Objeto devuelto por la API
+   * @returns {string} HTML de la card
+   */
+  function crearCardPais(pais) {
+    // Nombre común del país
+    const nombre   = pais.name?.common ?? 'Desconocido';
+
+    // Emoji de la bandera (la API devuelve un emoji directo en flags.emoji)
+    const bandera  = pais.flags?.emoji ?? '🏳️';
+
+    // Capital (puede ser un array, tomamos la primera)
+    const capital  = pais.capital?.[0] ?? 'Sin capital';
+
+    // Región y subregión
+    const region   = pais.region   ?? '—';
+    const subregion = pais.subregion ?? '';
+
+    // Moneda: el objeto currencies tiene claves dinámicas → tomamos la primera
+    const monedas  = pais.currencies
+      ? Object.values(pais.currencies).map(m => `${m.name} (${m.symbol ?? ''})`).join(', ')
+      : '—';
+
+    // Idiomas: igual que currencies
+    const idiomas  = pais.languages
+      ? Object.values(pais.languages).slice(0, 2).join(', ')
+      : '—';
+
+    // Población formateada
+    const poblacion = pais.population
+      ? pais.population.toLocaleString('es-ES')
+      : '—';
+
+    return `
+      <div class="pais-card">
+        <div class="pais-bandera">${bandera}</div>
+        <div class="pais-nombre">${nombre}</div>
+        <div class="pais-info">
+          <span>🏛️ Capital: <strong>${capital}</strong></span>
+          <span>💰 Moneda: ${monedas}</span>
+          <span>🗣️ Idioma: ${idiomas}</span>
+          <span>👥 Población: ${poblacion}</span>
+        </div>
+        <span class="pais-region">${subregion || region}</span>
+      </div>
+    `;
+  }
+
+  // ── Render del listado completo ────────────────────────────────
+
+  /**
+   * Pinta el array de países en el grid y actualiza el contador.
+   * @param {Array} paises - Array de objetos país
+   */
+  function renderizarPaises(paises) {
+    if (paises.length === 0) {
+      mostrarError('No se encontraron países con ese criterio. Prueba con otro nombre o región.');
+      return;
+    }
+
+    // Ordenamos alfabéticamente por nombre común
+    paises.sort((a, b) => (a.name?.common ?? '').localeCompare(b.name?.common ?? ''));
+
+    // Limitamos a 48 resultados para no saturar la UI
+    const muestra = paises.slice(0, 48);
+
+    grid.innerHTML = muestra.map(crearCardPais).join('');
+    contador.style.display = 'block';
+    contador.textContent   = `Mostrando ${muestra.length} de ${paises.length} países encontrados.`;
+    ocultarEstado();
+  }
+
+  // ── Lógica principal de fetch ──────────────────────────────────
+
+  /**
+   * Construye la URL según los filtros del usuario y llama a la API.
+   * Gestiona: cargando → response.ok → parseo JSON → error.
+   */
+  async function buscarPaises() {
+    const texto  = inputBuscar.value.trim();
+    const region = selectReg.value;
+
+    // Determinamos el endpoint según los filtros
+    let url;
+    if (texto) {
+      // Búsqueda por nombre (soporta nombres parciales)
+      url = `https://restcountries.com/v3.1/name/${encodeURIComponent(texto)}?${FIELDS}`;
+    } else if (region) {
+      // Filtro por región
+      url = `https://restcountries.com/v3.1/region/${region}?${FIELDS}`;
+    } else {
+      // Sin filtros → Europa por defecto (evita cargar todos los países)
+      url = `https://restcountries.com/v3.1/region/Europe?${FIELDS}`;
+    }
+
+    mostrarCargando();
+
+    try {
+      // Petición GET a la API
+      const respuesta = await fetch(url);
+
+      // Comprobamos que la respuesta sea correcta (2xx)
+      if (!respuesta.ok) {
+        // La API devuelve 404 cuando no encuentra nada
+        if (respuesta.status === 404) {
+          mostrarError(`No se encontró ningún país con el nombre "<strong>${texto}</strong>". Revisa la ortografía (en inglés).`);
+        } else {
+          mostrarError(`Error del servidor: ${respuesta.status} ${respuesta.statusText}`);
+        }
+        return;
+      }
+
+      // Parseamos el JSON
+      const paises = await respuesta.json();
+
+      // Pintamos los resultados
+      renderizarPaises(paises);
+
+    } catch (error) {
+      // Error de red u otro error inesperado
+      mostrarError('No se pudo conectar con la API. Comprueba tu conexión a internet e inténtalo de nuevo.');
+      console.error('Error en fetch:', error);
+    }
+  }
+
+  // ── Eventos de interacción ─────────────────────────────────────
+
+  // Enter en el input lanza la búsqueda
+  inputBuscar.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') buscarPaises();
+  });
+
+  // Cambiar la región limpia el texto y busca automáticamente
+  selectReg.addEventListener('change', () => {
+    inputBuscar.value = '';
+    buscarPaises();
+  });
+
+  // ── Carga inicial al abrir la página ──────────────────────────
+  // Mostramos Europa por defecto (relevante para transporte logístico europeo)
+  buscarPaises();
+</script>
+
+</body>
+</html>
