@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="uranzu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="clientes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="cliente" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="nombre" type="xs:string"/>
+                    <xs:element name="email" type="xs:string"/>
+                    <xs:element name="telefono" type="xs:string"/>
+                    <xs:element name="empresa" type="xs:string"/>
+                    <xs:element name="ciudad" type="xs:string"/>
+                    <xs:element name="tipoServicio">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="Nacional"/>
+                          <xs:enumeration value="Internacional"/>
+                          <xs:enumeration value="Almacenaje"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="fechaAlta" type="xs:date"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:string" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
