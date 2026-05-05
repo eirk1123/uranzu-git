@@ -1,34 +1,82 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Iniciar Sesión - Uranzu</title>
-<link href="stylesprint.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/></head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Iniciar Sesión - Uranzu</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesprint.css">
+</head>
 <body>
-<header>
-<div class="top-bar">
-<div class="logo">
-<h1>Uranzu Transporte Logístico</h1>
-</div>
-</div>
-</header>
-<main class="container my-4">
-<section id="login">
-<form action="sprint2_final.html" method="get">
-<h2>Iniciar Sesión</h2>
-<br/>
-<label>Usuario: <input required="" type="text"/></label><br/>
-<label>Contraseña: <input required="" type="password"/></label><br/>
-<button type="submit">Entrar</button>
-</form>
-<p><a href="index.html">Volver a la página principal</a></p>
-</section>
-</main>
-<footer>
-<p>© 2025 Uranzu Transporte Logístico</p>
-</footer>
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <h1>Uranzu Transporte Logístico</h1>
+      </div>
+      <div class="auth-buttons">
+        <a href="login_final.html">Iniciar sesión</a>
+        <a href="registro_final.html">Registrarse</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <section id="login">
+      <h2>Iniciar Sesión</h2>
+
+      <div id="errores" class="alert alert-danger d-none" role="alert"></div>
+
+      <form id="formLogin" novalidate style="margin-top:1rem;">
+        <div class="mb-3">
+          <label for="usuario" class="form-label">Usuario</label>
+          <input id="usuario" type="text" class="form-control" required placeholder="Tu usuario">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input id="password" type="password" class="form-control" required placeholder="Tu contraseña">
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+        <a class="btn btn-link" href="index.html">Volver a la página principal</a>
+      </form>
+
+      <!-- Mensaje de éxito -->
+      <div id="exito" class="d-none" style="text-align:center; padding:2rem 0;">
+        <div style="font-size:3rem;">✅</div>
+        <h3 style="margin-top:1rem;">¡Sesión iniciada correctamente!</h3>
+        <p style="color:var(--color-texto-suave);">Bienvenido a Uranzu Transporte Logístico.</p>
+        <a href="index.html" class="btn btn-primary" style="margin-top:1rem;">Ir a la web</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Uranzu Transporte Logístico</p>
+  </footer>
+
+  <script>
+    document.getElementById('formLogin').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const usuario  = document.getElementById('usuario').value.trim();
+      const password = document.getElementById('password').value;
+      const errores  = [];
+      const boxErrores = document.getElementById('errores');
+
+      if (usuario.length === 0) errores.push('El usuario es obligatorio.');
+      if (password.length === 0) errores.push('La contraseña es obligatoria.');
+
+      if (errores.length > 0) {
+        boxErrores.classList.remove('d-none');
+        boxErrores.innerHTML = '<strong>Revisa esto:</strong><ul class="mb-0">' +
+          errores.map(e => `<li>${e}</li>`).join('') + '</ul>';
+        return;
+      }
+
+      // Todo correcto: ocultar form y mostrar éxito
+      boxErrores.classList.add('d-none');
+      document.getElementById('formLogin').classList.add('d-none');
+      document.getElementById('exito').classList.remove('d-none');
+    });
+  </script>
 </body>
 </html>
