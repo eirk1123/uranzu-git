@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uranzu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="validacion.xsd">
+  <clientes>
+    <cliente id="C001">
+      <nombre>Ana López</nombre>
+      <email>ana.lopez@ejemplo.com</email>
+      <telefono>600123111</telefono>
+      <empresa>Textiles Norte</empresa>
+      <ciudad>Madrid</ciudad>
+      <tipoServicio>Nacional</tipoServicio>
+      <fechaAlta>2025-01-15</fechaAlta>
+    </cliente>
+    <cliente id="C002">
+      <nombre>Juan Pérez</nombre>
+      <email>juan.perez@ejemplo.com</email>
+      <telefono>600123222</telefono>
+      <empresa>Alimentos Río</empresa>
+      <ciudad>Valencia</ciudad>
+      <tipoServicio>Internacional</tipoServicio>
+      <fechaAlta>2024-11-03</fechaAlta>
+    </cliente>
+    <cliente id="C003">
+      <nombre>María García</nombre>
+      <email>maria.garcia@ejemplo.com</email>
+      <telefono>600123333</telefono>
+      <empresa>ElectroSur</empresa>
+      <ciudad>Sevilla</ciudad>
+      <tipoServicio>Almacenaje</tipoServicio>
+      <fechaAlta>2024-08-21</fechaAlta>
+    </cliente>
+    <cliente id="C004">
+      <nombre>Ikai Fernández</nombre>
+      <email>ikai.fernandez@ejemplo.com</email>
+      <telefono>600123444</telefono>
+      <empresa>Repuestos Atlántico</empresa>
+      <ciudad>Bilbao</ciudad>
+      <tipoServicio>Nacional</tipoServicio>
+      <fechaAlta>2025-02-02</fechaAlta>
+    </cliente>
+    <cliente id="C005">
+      <nombre>Lucía Martín</nombre>
+      <email>lucia.martin@ejemplo.com</email>
+      <telefono>600123555</telefono>
+      <empresa>Farmacia Central</empresa>
+      <ciudad>Barcelona</ciudad>
+      <tipoServicio>Internacional</tipoServicio>
+      <fechaAlta>2025-03-10</fechaAlta>
+    </cliente>
+  </clientes>
+</uranzu>
