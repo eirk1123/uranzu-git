@@ -58,6 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     showErrors([]);
     boxOk.classList.remove("d-none");
-    setTimeout(() => form.submit(), 350);
+    setTimeout(() => { window.location.href = "exito_inicio_final.html"; }, 350);
   });
 });
