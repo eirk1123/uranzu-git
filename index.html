@@ -10,10 +10,7 @@
   <style>
     /* ══ Estilos compartidos para las tres secciones API ══ */
 
-    .api-seccion {
-      max-width: 1000px;
-      width: 90%;
-    }
+    .api-seccion { max-width: 1000px; width: 90%; }
 
     .api-controles {
       display: flex;
@@ -27,17 +24,24 @@
       flex: 1;
       min-width: 180px;
       padding: 0.55rem 1rem;
-      border: 2px solid #ddd;
+      border: 2px solid var(--color-borde);
       border-radius: 8px;
       font-size: 1rem;
+      background-color: var(--color-card);
+      color: var(--color-texto);
       transition: border-color 0.2s;
-      background: white;
     }
+
+    .api-controles input::placeholder { color: var(--color-texto-suave); }
 
     .api-controles input:focus,
     .api-controles select:focus {
       outline: none;
       border-color: var(--color-secundario);
+    }
+
+    .api-controles select option {
+      background-color: var(--color-card);
     }
 
     .btn-api {
@@ -49,10 +53,11 @@
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
     }
 
     .btn-api:hover {
-      background-color: #8f1500;
+      background-color: var(--color-boton-hover);
       transform: translateY(-1px);
     }
 
@@ -60,7 +65,7 @@
       text-align: center;
       padding: 1.2rem;
       font-size: 1rem;
-      color: #555;
+      color: var(--color-texto-suave);
       display: none;
     }
 
@@ -71,9 +76,8 @@
 
     .spinner {
       display: inline-block;
-      width: 24px;
-      height: 24px;
-      border: 3px solid #ddd;
+      width: 22px; height: 22px;
+      border: 3px solid var(--color-borde);
       border-top-color: var(--color-secundario);
       border-radius: 50%;
       animation: girar 0.7s linear infinite;
@@ -84,137 +88,137 @@
     @keyframes girar { to { transform: rotate(360deg); } }
 
     .contador {
-      font-size: 0.88rem;
-      color: #666;
+      font-size: 0.85rem;
+      color: var(--color-texto-suave);
       margin-bottom: 0.5rem;
     }
 
-    /* ── Erik: Destinos (REST Countries) ── */
+    /* ─── Erik: Destinos ─── */
     #destinos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 1rem;
     }
 
     .pais-card {
-      background: #f8f9fa;
+      background: var(--color-card);
       border-radius: 12px;
+      border: 1px solid var(--color-borde);
       border-left: 4px solid var(--color-principal);
       padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
     }
 
     .pais-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      background: var(--color-card-hover);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
     .pais-bandera { font-size: 2.2rem; line-height: 1; }
-    .pais-nombre { font-weight: 700; font-size: 1rem; }
-    .pais-info { font-size: 0.82rem; color: #555; }
+
+    .pais-nombre {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-texto);
+    }
+
+    .pais-info { font-size: 0.8rem; color: var(--color-texto-suave); }
     .pais-info span { display: block; }
 
     .tag-region {
       display: inline-block;
       margin-top: 0.3rem;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.72rem;
+      font-weight: 700;
       padding: 0.15rem 0.6rem;
       border-radius: 20px;
-      background-color: var(--color-secundario);
-      color: white;
+      background-color: rgba(76, 201, 240, 0.15);
+      color: var(--color-secundario);
+      border: 1px solid rgba(76, 201, 240, 0.3);
+      letter-spacing: 0.3px;
     }
 
-    /* ── Arturo: Clima (Open-Meteo) ── */
+    /* ─── Arturo: Clima ─── */
     .clima-card {
-      background: linear-gradient(135deg, #00c6f8 0%, #0072ff 100%);
-      color: white;
+      background: linear-gradient(135deg, #1a2744 0%, #0d1b35 100%);
+      color: var(--color-texto);
       border-radius: 16px;
       padding: 2rem;
       max-width: 420px;
       margin: 0 auto;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0,114,255,0.3);
+      border: 1px solid rgba(76, 201, 240, 0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
 
-    .clima-ciudad {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-
-    .clima-pais {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-bottom: 1.2rem;
-    }
-
-    .clima-emoji {
-      font-size: 4rem;
-      margin-bottom: 0.5rem;
-      display: block;
-    }
+    .clima-ciudad { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .clima-pais { font-size: 0.85rem; color: var(--color-texto-suave); margin-bottom: 1.2rem; }
+    .clima-emoji { font-size: 4rem; margin-bottom: 0.4rem; display: block; }
 
     .clima-temp {
       font-size: 3rem;
       font-weight: 800;
+      color: var(--color-secundario);
       margin-bottom: 0.3rem;
     }
 
     .clima-descripcion {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      color: var(--color-texto-suave);
+      margin-bottom: 1rem;
     }
 
     .clima-detalles {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-      margin-top: 1rem;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
     }
 
     .clima-dato {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 10px;
       padding: 0.6rem;
     }
 
-    .clima-dato .label { font-size: 0.75rem; opacity: 0.85; }
-    .clima-dato .valor { font-size: 1.1rem; font-weight: 700; }
+    .clima-dato .label { font-size: 0.72rem; color: var(--color-texto-suave); }
+    .clima-dato .valor { font-size: 1rem; font-weight: 700; color: var(--color-texto); }
 
     .ciudades-rapidas {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 0.3rem;
     }
 
     .ciudad-btn {
-      background: #f0f0f0;
-      border: 2px solid #ddd;
+      background: var(--color-card);
+      border: 1px solid var(--color-borde);
       border-radius: 20px;
       padding: 0.3rem 0.9rem;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       cursor: pointer;
       transition: all 0.2s;
       font-weight: 500;
+      color: var(--color-texto-suave);
     }
 
     .ciudad-btn:hover {
-      background: var(--color-secundario);
-      color: white;
-      border-color: var(--color-secundario);
+      background: rgba(76, 201, 240, 0.15);
+      color: var(--color-secundario);
+      border-color: rgba(76, 201, 240, 0.4);
     }
 
-    /* ── Unai: Divisas (ExchangeRate) ── */
+    /* ─── Unai: Divisas ─── */
     .divisas-panel {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
 
     @media (max-width: 640px) {
@@ -222,17 +226,18 @@
     }
 
     .conversor-box {
-      background: #f8f9fa;
+      background: var(--color-card);
       border-radius: 12px;
-      border-left: 4px solid var(--color-secundario);
+      border: 1px solid var(--color-borde);
       padding: 1.2rem;
     }
 
     .conversor-box h4 {
       color: var(--color-secundario);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       margin-bottom: 1rem;
+      letter-spacing: 0.2px;
     }
 
     .conversor-fila {
@@ -244,20 +249,23 @@
     }
 
     .conversor-fila input[type="number"] {
-      width: 110px;
+      width: 120px;
       padding: 0.5rem 0.8rem;
-      border: 2px solid #ddd;
+      border: 2px solid var(--color-borde);
       border-radius: 8px;
       font-size: 1rem;
       font-weight: 600;
+      background: var(--color-superficie);
+      color: var(--color-texto);
     }
 
     .conversor-fila select {
       padding: 0.5rem 0.8rem;
-      border: 2px solid #ddd;
+      border: 2px solid var(--color-borde);
       border-radius: 8px;
-      font-size: 0.95rem;
-      background: white;
+      font-size: 0.9rem;
+      background: var(--color-superficie);
+      color: var(--color-texto);
       cursor: pointer;
     }
 
@@ -265,60 +273,48 @@
       font-size: 1.4rem;
       font-weight: 800;
       color: var(--color-principal);
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
     }
 
     .tasa-info {
-      font-size: 0.82rem;
-      color: #777;
+      font-size: 0.8rem;
+      color: var(--color-texto-suave);
       margin-top: 0.3rem;
     }
 
-    .divisas-tabla {
-      max-height: 320px;
-      overflow-y: auto;
-    }
+    .divisas-tabla { max-height: 300px; overflow-y: auto; }
 
     .divisa-fila {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.5rem 0.8rem;
+      padding: 0.45rem 0.6rem;
       border-radius: 8px;
       transition: background 0.15s;
     }
 
-    .divisa-fila:hover { background: #f0f0f0; }
+    .divisa-fila:hover { background: var(--color-card-hover); }
 
-    .divisa-codigo {
-      font-weight: 700;
-      font-size: 0.95rem;
-      width: 60px;
-    }
-
-    .divisa-nombre {
-      flex: 1;
-      font-size: 0.82rem;
-      color: #555;
-      padding: 0 0.5rem;
-    }
-
-    .divisa-valor {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--color-principal);
-    }
+    .divisa-codigo { font-weight: 700; font-size: 0.9rem; width: 55px; color: var(--color-texto); }
+    .divisa-nombre { flex: 1; font-size: 0.78rem; color: var(--color-texto-suave); padding: 0 0.5rem; }
+    .divisa-valor { font-weight: 700; font-size: 0.9rem; color: var(--color-secundario); }
 
     .badge-actualizacion {
       display: inline-block;
-      background: #e8f5e9;
-      color: #2e7d32;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
+      background: rgba(76,201,240,0.1);
+      color: var(--color-secundario);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
       border-radius: 20px;
       font-weight: 600;
       margin-left: 0.5rem;
+      border: 1px solid rgba(76,201,240,0.2);
     }
+
+    /* Scrollbar oscuro */
+    .divisas-tabla::-webkit-scrollbar { width: 6px; }
+    .divisas-tabla::-webkit-scrollbar-track { background: var(--color-card); border-radius: 3px; }
+    .divisas-tabla::-webkit-scrollbar-thumb { background: var(--color-borde); border-radius: 3px; }
   </style>
 </head>
 <body>
@@ -330,20 +326,20 @@
       <p>Conectando destinos, moviendo el futuro</p>
     </div>
     <div class="auth-buttons">
-      <a class="btn-login" href="login_final.html">Iniciar sesión</a>
-      <a class="btn-register" href="registro_final.html">Registrarse</a>
+      <a href="login_final.html">Iniciar sesión</a>
+      <a href="registro_final.html">Registrarse</a>
     </div>
   </div>
   <nav>
     <ul class="button">
-      <li><a class="btn" href="#inicio">Inicio</a></li>
-      <li><a class="btn" href="#servicios">Servicios</a></li>
-      <li><a class="btn" href="#flota">Flota</a></li>
-      <li><a class="btn" href="#nosotros">Nosotros</a></li>
-      <li><a class="btn" href="#destinos">Destinos</a></li>
-      <li><a class="btn" href="#clima">Clima</a></li>
-      <li><a class="btn" href="#divisas">Divisas</a></li>
-      <li><a class="btn" href="#contacto">Contacto</a></li>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#flota">Flota</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#destinos">Destinos</a></li>
+      <li><a href="#clima">Clima</a></li>
+      <li><a href="#divisas">Divisas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
 </header>
@@ -353,7 +349,7 @@
   <!-- ══ INICIO ══ -->
   <section id="inicio">
     <h2>Inicio</h2>
-    <p>En <strong>Uranzu Transporte Logístico</strong> somos expertos en ofrecer soluciones de transporte eficientes y seguras a nivel nacional e internacional. Nuestro compromiso es garantizar puntualidad, seguridad y confianza en cada envío.</p>
+    <p>En <strong style="color:var(--color-texto);">Uranzu Transporte Logístico</strong> somos expertos en ofrecer soluciones de transporte eficientes y seguras a nivel nacional e internacional. Nuestro compromiso es garantizar puntualidad, seguridad y confianza en cada envío.</p>
     <img alt="Camión de transporte logístico de Uranzu" src="camion.jpg"/>
   </section>
 
@@ -387,14 +383,10 @@
     <p>Uranzu es una empresa con más de 20 años de experiencia en el sector logístico. Nuestro equipo humano y tecnológico está comprometido con la excelencia en el servicio y la satisfacción de nuestros clientes.</p>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════
-       ERIK — Destinos Internacionales
-       API: REST Countries — https://restcountries.com/v3.1/
-       Endpoints: /name/{nombre}  |  /region/{region}
-       ══════════════════════════════════════════════════════════ -->
+  <!-- ══ ERIK — Destinos (REST Countries) ══ -->
   <section id="destinos" class="api-seccion">
-    <h2>Destinos Internacionales <small style="font-size:0.6em;color:#999;">Erik · REST Countries API</small></h2>
-    <p>Busca información sobre los países a los que operamos: capital, moneda, idioma y población. Filtra por región o busca por nombre.</p>
+    <h2>Destinos Internacionales <small style="font-size:0.55em;color:var(--color-texto-suave);font-weight:400;">Erik · REST Countries API</small></h2>
+    <p>Busca información sobre los países a los que operamos: capital, moneda, idioma y población.</p>
 
     <div class="api-controles">
       <input type="text" id="dest-input" placeholder="🔍 Buscar país en inglés (ej. France)" aria-label="Buscar país"/>
@@ -414,24 +406,18 @@
     <div id="destinos-grid"></div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════
-       ARTURO — Clima en Destinos
-       API: Open-Meteo — https://api.open-meteo.com/v1/
-       Geocoding: https://geocoding-api.open-meteo.com/v1/search
-       Sin API key. Gratuita y abierta.
-       ══════════════════════════════════════════════════════════ -->
+  <!-- ══ ARTURO — Clima (Open-Meteo) ══ -->
   <section id="clima" class="api-seccion">
-    <h2>Clima en Destinos <small style="font-size:0.6em;color:#999;">Arturo · Open-Meteo API</small></h2>
-    <p>Consulta el tiempo actual en cualquier ciudad de destino antes de planificar una ruta. Datos meteorológicos en tiempo real sin necesidad de registro.</p>
+    <h2>Clima en Destinos <small style="font-size:0.55em;color:var(--color-texto-suave);font-weight:400;">Arturo · Open-Meteo API</small></h2>
+    <p>Consulta el tiempo actual en cualquier ciudad de destino antes de planificar una ruta.</p>
 
     <div class="api-controles">
       <input type="text" id="clima-input" placeholder="🌍 Escribe una ciudad (ej. París, Berlín)" aria-label="Buscar ciudad"/>
       <button class="btn-api" onclick="climaBuscar()">Ver clima</button>
     </div>
 
-    <!-- Accesos rápidos a ciudades frecuentes -->
     <div class="ciudades-rapidas">
-      <span style="font-size:0.85rem;color:#666;align-self:center;">Accesos rápidos:</span>
+      <span style="font-size:0.82rem;color:var(--color-texto-suave);align-self:center;">Accesos rápidos:</span>
       <button class="ciudad-btn" onclick="climaCiudadRapida('Madrid')">🇪🇸 Madrid</button>
       <button class="ciudad-btn" onclick="climaCiudadRapida('Paris')">🇫🇷 París</button>
       <button class="ciudad-btn" onclick="climaCiudadRapida('Berlin')">🇩🇪 Berlín</button>
@@ -444,14 +430,10 @@
     <div id="clima-resultado" style="margin-top:1.5rem;"></div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════
-       UNAI — Divisas Internacionales
-       API: ExchangeRate API — https://open.er-api.com/v6/
-       Sin API key. Gratuita y abierta.
-       ══════════════════════════════════════════════════════════ -->
+  <!-- ══ UNAI — Divisas (ExchangeRate) ══ -->
   <section id="divisas" class="api-seccion">
-    <h2>Divisas Internacionales <small style="font-size:0.6em;color:#999;">Unai · ExchangeRate API</small></h2>
-    <p>Consulta los tipos de cambio actuales y convierte importes entre monedas. Útil para calcular costes en operaciones de transporte internacional.</p>
+    <h2>Divisas Internacionales <small style="font-size:0.55em;color:var(--color-texto-suave);font-weight:400;">Unai · ExchangeRate API</small></h2>
+    <p>Consulta los tipos de cambio actuales y convierte importes entre monedas para operaciones de transporte internacional.</p>
 
     <div class="api-controles">
       <select id="divisas-base" aria-label="Moneda base" onchange="divisasCargar()">
@@ -468,22 +450,20 @@
     <div id="divisas-estado" class="api-estado"></div>
 
     <div id="divisas-panel" class="divisas-panel" style="display:none;">
-      <!-- Conversor -->
       <div class="conversor-box">
         <h4>💱 Conversor rápido</h4>
         <div class="conversor-fila">
           <input type="number" id="conv-cantidad" value="1000" min="0" oninput="divisasConvertir()"/>
           <select id="conv-origen" onchange="divisasConvertir()"></select>
         </div>
-        <div style="color:#999;font-size:0.9rem;margin-bottom:0.5rem;">▼ equivale a</div>
+        <div style="color:var(--color-texto-suave);font-size:0.88rem;margin-bottom:0.5rem;">▼ equivale a</div>
         <div class="conversor-fila">
-          <input type="number" id="conv-resultado" readonly style="background:#f0f0f0;font-weight:700;color:var(--color-principal);"/>
+          <input type="number" id="conv-resultado" readonly style="font-weight:700;color:var(--color-secundario);"/>
           <select id="conv-destino" onchange="divisasConvertir()"></select>
         </div>
         <div class="tasa-info" id="conv-tasa"></div>
       </div>
 
-      <!-- Tabla de tasas -->
       <div class="conversor-box">
         <h4>📊 Tasas principales <span class="badge-actualizacion" id="divisas-fecha"></span></h4>
         <div class="divisas-tabla" id="divisas-tabla"></div>
@@ -509,11 +489,10 @@
 </footer>
 
 <script>
-/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    UTILIDADES COMPARTIDAS
-   ════════════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
-/** Muestra spinner en un contenedor de estado */
 function uiCargando(idEstado, idResultado) {
   const e = document.getElementById(idEstado);
   e.style.display = 'block';
@@ -522,7 +501,6 @@ function uiCargando(idEstado, idResultado) {
   if (idResultado) document.getElementById(idResultado).innerHTML = '';
 }
 
-/** Muestra un mensaje de error sin romper la página */
 function uiError(idEstado, mensaje) {
   const e = document.getElementById(idEstado);
   e.style.display = 'block';
@@ -530,31 +508,24 @@ function uiError(idEstado, mensaje) {
   e.innerHTML = `⚠️ ${mensaje}`;
 }
 
-/** Oculta el estado */
 function uiOcultar(idEstado) {
   document.getElementById(idEstado).style.display = 'none';
 }
 
-
-/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    ERIK — REST Countries API
    https://restcountries.com/v3.1/
-   ════════════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
 const DEST_FIELDS = 'fields=name,flags,capital,region,subregion,currencies,languages,population';
 
-/** Construye HTML de una card de país */
 function destCrearCard(p) {
   const nombre    = p.name?.common ?? 'Desconocido';
   const bandera   = p.flags?.emoji ?? '🏳️';
   const capital   = p.capital?.[0] ?? 'Sin capital';
   const subregion = p.subregion ?? p.region ?? '—';
-  const monedas   = p.currencies
-    ? Object.values(p.currencies).map(m => `${m.name} (${m.symbol ?? ''})`).join(', ')
-    : '—';
-  const idiomas   = p.languages
-    ? Object.values(p.languages).slice(0, 2).join(', ')
-    : '—';
+  const monedas   = p.currencies ? Object.values(p.currencies).map(m => `${m.name} (${m.symbol ?? ''})`).join(', ') : '—';
+  const idiomas   = p.languages  ? Object.values(p.languages).slice(0, 2).join(', ') : '—';
   const poblacion = p.population ? p.population.toLocaleString('es-ES') : '—';
 
   return `
@@ -562,16 +533,15 @@ function destCrearCard(p) {
       <div class="pais-bandera">${bandera}</div>
       <div class="pais-nombre">${nombre}</div>
       <div class="pais-info">
-        <span>🏛️ Capital: <strong>${capital}</strong></span>
-        <span>💰 Moneda: ${monedas}</span>
-        <span>🗣️ Idioma: ${idiomas}</span>
+        <span>🏛️ Capital: <strong style="color:var(--color-texto)">${capital}</strong></span>
+        <span>💰 ${monedas}</span>
+        <span>🗣️ ${idiomas}</span>
         <span>👥 ${poblacion} hab.</span>
       </div>
       <span class="tag-region">${subregion}</span>
     </div>`;
 }
 
-/** Pinta el grid de países */
 function destRenderizar(paises) {
   if (!paises.length) {
     uiError('dest-estado', 'No se encontraron países. Prueba otro nombre (en inglés) o región.');
@@ -586,15 +556,14 @@ function destRenderizar(paises) {
   uiOcultar('dest-estado');
 }
 
-/** Fetch principal de destinos */
 async function destBuscar() {
   const texto  = document.getElementById('dest-input').value.trim();
   const region = document.getElementById('dest-region').value;
 
   let url;
-  if (texto)        url = `https://restcountries.com/v3.1/name/${encodeURIComponent(texto)}?${DEST_FIELDS}`;
-  else if (region)  url = `https://restcountries.com/v3.1/region/${region}?${DEST_FIELDS}`;
-  else              url = `https://restcountries.com/v3.1/region/Europe?${DEST_FIELDS}`;
+  if (texto)       url = `https://restcountries.com/v3.1/name/${encodeURIComponent(texto)}?${DEST_FIELDS}`;
+  else if (region) url = `https://restcountries.com/v3.1/region/${region}?${DEST_FIELDS}`;
+  else             url = `https://restcountries.com/v3.1/region/Europe?${DEST_FIELDS}`;
 
   document.getElementById('destinos-grid').innerHTML = '';
   document.getElementById('dest-contador').style.display = 'none';
@@ -614,55 +583,47 @@ async function destBuscar() {
   }
 }
 
-// Enter en input lanza búsqueda
 document.getElementById('dest-input').addEventListener('keydown', e => { if (e.key === 'Enter') destBuscar(); });
-// Cambio de región limpia input y busca
 document.getElementById('dest-region').addEventListener('change', () => {
   document.getElementById('dest-input').value = '';
   destBuscar();
 });
 
-
-/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    ARTURO — Open-Meteo API  (sin API key)
    Geocoding: https://geocoding-api.open-meteo.com/v1/search
    Clima:     https://api.open-meteo.com/v1/forecast
-   ════════════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
-/**
- * Convierte el código WMO de tiempo en emoji + descripción.
- * Referencia: https://open-meteo.com/en/docs#weathervariables
- */
 function climaWMO(codigo) {
   const mapa = {
-    0:  { emoji: '☀️',  desc: 'Despejado' },
-    1:  { emoji: '🌤️', desc: 'Mayormente despejado' },
-    2:  { emoji: '⛅',  desc: 'Parcialmente nublado' },
-    3:  { emoji: '☁️',  desc: 'Nublado' },
-    45: { emoji: '🌫️', desc: 'Niebla' },
-    48: { emoji: '🌫️', desc: 'Niebla con escarcha' },
-    51: { emoji: '🌦️', desc: 'Llovizna ligera' },
-    53: { emoji: '🌦️', desc: 'Llovizna moderada' },
-    55: { emoji: '🌧️', desc: 'Llovizna intensa' },
-    61: { emoji: '🌧️', desc: 'Lluvia ligera' },
-    63: { emoji: '🌧️', desc: 'Lluvia moderada' },
-    65: { emoji: '🌧️', desc: 'Lluvia intensa' },
-    71: { emoji: '🌨️', desc: 'Nieve ligera' },
-    73: { emoji: '🌨️', desc: 'Nieve moderada' },
-    75: { emoji: '❄️',  desc: 'Nieve intensa' },
-    80: { emoji: '🌦️', desc: 'Chubascos ligeros' },
-    81: { emoji: '🌧️', desc: 'Chubascos moderados' },
-    82: { emoji: '⛈️',  desc: 'Chubascos fuertes' },
-    95: { emoji: '⛈️',  desc: 'Tormenta' },
-    96: { emoji: '⛈️',  desc: 'Tormenta con granizo' },
-    99: { emoji: '⛈️',  desc: 'Tormenta fuerte con granizo' },
+    0:  { emoji:'☀️',  desc:'Despejado' },
+    1:  { emoji:'🌤️', desc:'Mayormente despejado' },
+    2:  { emoji:'⛅',  desc:'Parcialmente nublado' },
+    3:  { emoji:'☁️',  desc:'Nublado' },
+    45: { emoji:'🌫️', desc:'Niebla' },
+    48: { emoji:'🌫️', desc:'Niebla con escarcha' },
+    51: { emoji:'🌦️', desc:'Llovizna ligera' },
+    53: { emoji:'🌦️', desc:'Llovizna moderada' },
+    55: { emoji:'🌧️', desc:'Llovizna intensa' },
+    61: { emoji:'🌧️', desc:'Lluvia ligera' },
+    63: { emoji:'🌧️', desc:'Lluvia moderada' },
+    65: { emoji:'🌧️', desc:'Lluvia intensa' },
+    71: { emoji:'🌨️', desc:'Nieve ligera' },
+    73: { emoji:'🌨️', desc:'Nieve moderada' },
+    75: { emoji:'❄️',  desc:'Nieve intensa' },
+    80: { emoji:'🌦️', desc:'Chubascos ligeros' },
+    81: { emoji:'🌧️', desc:'Chubascos moderados' },
+    82: { emoji:'⛈️',  desc:'Chubascos fuertes' },
+    95: { emoji:'⛈️',  desc:'Tormenta' },
+    96: { emoji:'⛈️',  desc:'Tormenta con granizo' },
+    99: { emoji:'⛈️',  desc:'Tormenta fuerte con granizo' },
   };
-  return mapa[codigo] ?? { emoji: '🌡️', desc: 'Condición desconocida' };
+  return mapa[codigo] ?? { emoji:'🌡️', desc:'Condición desconocida' };
 }
 
-/** Renderiza la card de clima */
 function climaRenderizar(ciudad, pais, lat, lon, datos) {
-  const { temperature, windspeed, weathercode, is_day } = datos.current_weather;
+  const { temperature, windspeed, weathercode } = datos.current_weather;
   const { emoji, desc } = climaWMO(weathercode);
   const sensacion = (temperature - (0.4 * (1 - Math.min(windspeed, 50) / 50))).toFixed(1);
 
@@ -683,18 +644,17 @@ function climaRenderizar(ciudad, pais, lat, lon, datos) {
           <div class="valor">~${sensacion}°C</div>
         </div>
         <div class="clima-dato">
-          <div class="label">🌅 Momento</div>
-          <div class="valor">${is_day ? 'Día' : 'Noche'}</div>
+          <div class="label">📍 Lat</div>
+          <div class="valor">${lat.toFixed(2)}</div>
         </div>
         <div class="clima-dato">
-          <div class="label">📍 Coordenadas</div>
-          <div class="valor">${lat.toFixed(1)}, ${lon.toFixed(1)}</div>
+          <div class="label">📍 Lon</div>
+          <div class="valor">${lon.toFixed(2)}</div>
         </div>
       </div>
     </div>`;
 }
 
-/** Busca clima: primero geocoding → luego weather */
 async function climaBuscar() {
   const ciudad = document.getElementById('clima-input').value.trim();
   if (!ciudad) { uiError('clima-estado', 'Escribe el nombre de una ciudad.'); return; }
@@ -702,7 +662,6 @@ async function climaBuscar() {
   uiCargando('clima-estado', 'clima-resultado');
 
   try {
-    // Paso 1 — Geocoding: obtener lat/lon de la ciudad
     const geoRes = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(ciudad)}&count=1&language=es&format=json`
     );
@@ -714,18 +673,15 @@ async function climaBuscar() {
       return;
     }
 
-    const lugar = geoData.results[0];
-    const { latitude: lat, longitude: lon, name, country } = lugar;
+    const { latitude: lat, longitude: lon, name, country } = geoData.results[0];
 
-    // Paso 2 — Weather: obtener datos meteorológicos actuales
     const wxRes = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&wind_speed_unit=kmh`
     );
     if (!wxRes.ok) { uiError('clima-estado', `Error obteniendo el clima (${wxRes.status}).`); return; }
 
-    const wxData = await wxRes.json();
     uiOcultar('clima-estado');
-    climaRenderizar(name, country ?? '', lat, lon, wxData);
+    climaRenderizar(name, country ?? '', lat, lon, await wxRes.json());
 
   } catch (err) {
     uiError('clima-estado', 'Error de conexión. Comprueba tu red e inténtalo de nuevo.');
@@ -733,78 +689,63 @@ async function climaBuscar() {
   }
 }
 
-/** Botones de acceso rápido a ciudades */
 function climaCiudadRapida(nombre) {
   document.getElementById('clima-input').value = nombre;
   climaBuscar();
 }
 
-// Enter en input de clima
 document.getElementById('clima-input').addEventListener('keydown', e => { if (e.key === 'Enter') climaBuscar(); });
 
-
-/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════
    UNAI — ExchangeRate API  (sin API key)
    https://open.er-api.com/v6/latest/{moneda}
-   ════════════════════════════════════════════════════════════════ */
+   ════════════════════════════════════════════════════════════ */
 
-// Monedas principales a mostrar en la tabla
 const DIVISAS_PRINCIPALES = [
-  { codigo: 'USD', nombre: 'Dólar americano' },
-  { codigo: 'EUR', nombre: 'Euro' },
-  { codigo: 'GBP', nombre: 'Libra esterlina' },
-  { codigo: 'CHF', nombre: 'Franco suizo' },
-  { codigo: 'JPY', nombre: 'Yen japonés' },
-  { codigo: 'CNY', nombre: 'Yuan chino' },
-  { codigo: 'MXN', nombre: 'Peso mexicano' },
-  { codigo: 'BRL', nombre: 'Real brasileño' },
-  { codigo: 'CAD', nombre: 'Dólar canadiense' },
-  { codigo: 'AUD', nombre: 'Dólar australiano' },
-  { codigo: 'KRW', nombre: 'Won surcoreano' },
-  { codigo: 'INR', nombre: 'Rupia india' },
-  { codigo: 'TRY', nombre: 'Lira turca' },
-  { codigo: 'PLN', nombre: 'Esloti polaco' },
-  { codigo: 'SEK', nombre: 'Corona sueca' },
+  { codigo:'USD', nombre:'Dólar americano' },
+  { codigo:'EUR', nombre:'Euro' },
+  { codigo:'GBP', nombre:'Libra esterlina' },
+  { codigo:'CHF', nombre:'Franco suizo' },
+  { codigo:'JPY', nombre:'Yen japonés' },
+  { codigo:'CNY', nombre:'Yuan chino' },
+  { codigo:'MXN', nombre:'Peso mexicano' },
+  { codigo:'BRL', nombre:'Real brasileño' },
+  { codigo:'CAD', nombre:'Dólar canadiense' },
+  { codigo:'AUD', nombre:'Dólar australiano' },
+  { codigo:'KRW', nombre:'Won surcoreano' },
+  { codigo:'INR', nombre:'Rupia india' },
+  { codigo:'TRY', nombre:'Lira turca' },
+  { codigo:'PLN', nombre:'Esloti polaco' },
+  { codigo:'SEK', nombre:'Corona sueca' },
 ];
 
-// Tasas cargadas en memoria para el conversor
 let divisasTasas = {};
 let divisasBaseActual = 'EUR';
 
-/** Rellena los selectores del conversor con las monedas disponibles */
 function divisasRellenarSelectores() {
   const opciones = DIVISAS_PRINCIPALES.map(d =>
     `<option value="${d.codigo}">${d.codigo} — ${d.nombre}</option>`
   ).join('');
-  document.getElementById('conv-origen').innerHTML = opciones;
+  document.getElementById('conv-origen').innerHTML  = opciones;
   document.getElementById('conv-destino').innerHTML = opciones;
-  // Defaults: origen = base, destino = USD
   document.getElementById('conv-origen').value  = divisasBaseActual;
   document.getElementById('conv-destino').value = divisasBaseActual === 'USD' ? 'EUR' : 'USD';
 }
 
-/** Calcula y muestra el resultado del conversor */
 function divisasConvertir() {
   const cantidad = parseFloat(document.getElementById('conv-cantidad').value) || 0;
   const origen   = document.getElementById('conv-origen').value;
   const destino  = document.getElementById('conv-destino').value;
-
   if (!divisasTasas[origen] || !divisasTasas[destino]) return;
-
-  // Convertimos a base EUR primero, luego al destino
-  const enBase   = cantidad / divisasTasas[origen];
-  const resultado = enBase * divisasTasas[destino];
-
+  const resultado = (cantidad / divisasTasas[origen]) * divisasTasas[destino];
   document.getElementById('conv-resultado').value = resultado.toFixed(4);
   document.getElementById('conv-tasa').textContent =
     `1 ${origen} = ${(divisasTasas[destino] / divisasTasas[origen]).toFixed(6)} ${destino}`;
 }
 
-/** Renderiza la tabla de tasas principales */
 function divisasRenderizarTabla(rates) {
-  const base = divisasBaseActual;
   const filas = DIVISAS_PRINCIPALES
-    .filter(d => d.codigo !== base)
+    .filter(d => d.codigo !== divisasBaseActual)
     .map(d => {
       const tasa = rates[d.codigo];
       if (!tasa) return '';
@@ -815,11 +756,9 @@ function divisasRenderizarTabla(rates) {
           <span class="divisa-valor">${tasa.toFixed(4)}</span>
         </div>`;
     }).join('');
-
   document.getElementById('divisas-tabla').innerHTML = filas;
 }
 
-/** Fetch principal de divisas */
 async function divisasCargar() {
   const base = document.getElementById('divisas-base').value;
   divisasBaseActual = base;
@@ -832,28 +771,19 @@ async function divisasCargar() {
     if (!res.ok) { uiError('divisas-estado', `Error del servidor: ${res.status}.`); return; }
 
     const data = await res.json();
-
-    // Comprobamos que la respuesta sea válida
     if (data.result !== 'success') {
       uiError('divisas-estado', 'La API no devolvió datos válidos. Inténtalo más tarde.');
       return;
     }
 
-    // Guardamos tasas en memoria para el conversor
     divisasTasas = data.rates;
-
-    // Fecha de actualización
     const fecha = new Date(data.time_last_update_utc).toLocaleDateString('es-ES');
     document.getElementById('divisas-fecha').textContent = `Actualizado: ${fecha}`;
 
-    // Rellenamos selectores y tabla
     divisasRellenarSelectores();
     divisasRenderizarTabla(data.rates);
-
     uiOcultar('divisas-estado');
     document.getElementById('divisas-panel').style.display = 'grid';
-
-    // Calculamos conversión inicial
     divisasConvertir();
 
   } catch (err) {
@@ -862,13 +792,10 @@ async function divisasCargar() {
   }
 }
 
-
-/* ════════════════════════════════════════════════════════════════
-   CARGA INICIAL AL ABRIR LA PÁGINA
-   ════════════════════════════════════════════════════════════════ */
-destBuscar();       // Erik:  carga países de Europa por defecto
-climaCiudadRapida('Madrid');  // Arturo: carga clima de Madrid por defecto
-divisasCargar();    // Unai:  carga tasas EUR por defecto
+/* ══ Carga inicial ══ */
+destBuscar();
+climaCiudadRapida('Madrid');
+divisasCargar();
 </script>
 
 </body>
